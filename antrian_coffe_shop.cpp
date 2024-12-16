@@ -15,6 +15,7 @@ struct Customer {
 queue<Customer> customerQueue; 
 int queueCounter = 1; 
 
+// ADD CUSTOMER
 void addCustomer() {
     Customer customer;
     customer.queueNumber = queueCounter++;
@@ -24,6 +25,10 @@ void addCustomer() {
     cout << "Pelanggan " << customer.name << " dengan No. Antrian " << customer.queueNumber << " telah ditambahkan ke antrian.\n";
 }
 
+// DELETE ORDER (COMING SOON
+// { CODE }
+
+// DETAIL ORDER
 void showOrderDetails() {
     if (customerQueue.empty()) {
         cout << "Tidak ada pelanggan dalam antrian.\n";
@@ -47,6 +52,7 @@ void showOrderDetails() {
     }
 }
 
+// UPDATE ORDER
 void updateOrder() {
     if (customerQueue.empty()) {
         cout << "Tidak ada pelanggan dalam antrian.\n";
@@ -77,6 +83,7 @@ void updateOrder() {
     }
 }
 
+// PAYMENT
 void processPayment() {
     if (customerQueue.empty()) {
         cout << "Tidak ada pelanggan dalam antrian.\n";
