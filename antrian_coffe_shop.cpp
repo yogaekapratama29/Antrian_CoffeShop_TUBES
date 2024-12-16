@@ -15,6 +15,14 @@ struct Customer {
 queue<Customer> customerQueue; 
 int queueCounter = 1; 
 
+void addCustomer() {
+    Customer customer;
+    customer.queueNumber = queueCounter++;
+    cout << "Masukkan nama pelanggan: ";
+    cin >> customer.name;
+    customerQueue.push(customer);
+    cout << "Pelanggan " << customer.name << " dengan No. Antrian " << customer.queueNumber << " telah ditambahkan ke antrian.\n";
+}
 
 void processPayment() {
     if (customerQueue.empty()) {
