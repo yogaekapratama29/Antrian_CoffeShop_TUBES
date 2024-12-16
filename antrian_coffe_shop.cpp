@@ -24,7 +24,6 @@ void addCustomer() {
     cout << "Pelanggan " << customer.name << " dengan No. Antrian " << customer.queueNumber << " telah ditambahkan ke antrian.\n";
 }
 
-
 void showOrderDetails() {
     if (customerQueue.empty()) {
         cout << "Tidak ada pelanggan dalam antrian.\n";
