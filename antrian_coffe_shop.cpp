@@ -47,6 +47,36 @@ void showOrderDetails() {
     }
 }
 
+void updateOrder() {
+    if (customerQueue.empty()) {
+        cout << "Tidak ada pelanggan dalam antrian.\n";
+        return;
+    }
+    
+    string product;
+    cout << "Masukkan nama produk yang ingin diupdate: ";
+    cin >> product;
+    
+    map<string, int>& orders = customerQueue.front().orders;
+
+    if (orders.find(product) == orders.end()) {
+        cout << "Produk tidak ditemukan dalam pesanan.\n";
+        return;
+    }
+    
+    int newQuantity;
+    cout << "Masukkan jumlah baru untuk " << product << ": ";
+    cin >> newQuantity;
+
+    if (newQuantity == 0) {
+        orders.erase(product);
+        cout << "Pesanan " << product << " telah dihapus.\n";
+    } else {
+        orders[product] = newQuantity;
+        cout << "Pesanan " << product << " telah diupdate menjadi " << newQuantity << ".\n";
+    }
+}
+
 void processPayment() {
     if (customerQueue.empty()) {
         cout << "Tidak ada pelanggan dalam antrian.\n";
