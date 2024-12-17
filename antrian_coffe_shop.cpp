@@ -3,7 +3,6 @@
 #include <map>
 #include <iomanip>
 
-
 using namespace std;
 
 struct Customer {
@@ -11,6 +10,16 @@ struct Customer {
     string name;
     map<string, int> orders; 
 };
+
+map<string, double> menu;
+
+void initializeMenu() {
+    menu["kopi_susu"] = 15000;
+    menu["latte"] = 20000;
+    menu["americano"] = 18000;
+    menu["croissant"] = 25000;
+    menu["brownies"] = 30000;
+}
 
 queue<Customer> customerQueue; 
 int queueCounter = 1; 
@@ -25,8 +34,39 @@ void addCustomer() {
     cout << "Pelanggan " << customer.name << " dengan No. Antrian " << customer.queueNumber << " telah ditambahkan ke antrian.\n";
 }
 
-// DELETE ORDER (COMING SOON
-// { CODE }
+// DISPLAY MENU
+void displayMenu() {
+    cout << "\n=== Daftar Menu ===\n";
+    cout << left << setw(15) << "Produk" << "Harga" << endl;
+    cout << "-------------------------\n";
+    for (map<string, double>::const_iterator it = menu.begin(); it != menu.end(); ++it) {
+        cout << left << setw(15) << it->first << "Rp " << it->second << endl;
+    }
+}
+
+// ADD ORDER
+void addOrder() {
+    if (customerQueue.empty()) {
+        cout << "Tidak ada pelanggan dalam antrian.\n";
+        return;
+    }
+    displayMenu();
+
+    string product;
+    int quantity;
+    cout << "Masukkan nama produk: ";
+    cin >> product;
+
+    if (menu.find(product) == menu.end()) {
+        cout << "Produk tidak tersedia di menu.\n";
+        return;
+    }
+
+    cout << "Masukkan jumlah: ";
+    cin >> quantity;
+    customerQueue.front().orders[product] += quantity;
+    cout << "Pesanan " << quantity << " " << product << " telah ditambahkan untuk pelanggan " << customerQueue.front().name << ".\n";
+}
 
 // DETAIL ORDER
 void showOrderDetails() {
@@ -92,4 +132,8 @@ void processPayment() {
     Customer customer = customerQueue.front();
     customerQueue.pop();
     cout << "Pembayaran selesai untuk pelanggan " << customer.name << " (No. Antrian " << customer.queueNumber << ").\n";
+}
+
+int main() {
+    return 0;
 }
