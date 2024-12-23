@@ -68,6 +68,27 @@ void addOrder() {
     cout << "Pesanan " << quantity << " " << product << " telah ditambahkan untuk pelanggan " << customerQueue.front().name << ".\n";
 }
 
+// DELETE ORDER
+void deleteOrder() {
+    if (customerQueue.empty()) {
+        cout << "Tidak Ada Pelanggan Dalam Antrian.\n" ;
+        return;
+    }
+
+    string product;
+    cout << "Masukan Nama Produk Yang Akan Dihapus: ";
+    cin >> product;
+    map<string, int>& orders = customerQueue.front().orders;
+
+    if (orders.find(product) != orders.end()) {
+        orders.erase(product);
+        cout << "Pesanan: " << product << " Telah Dihapus Dari Antrian Pelanggan: " << customerQueue.front().name << ".\n";
+    } else  {
+        cout << "Produk Tidak Ditemukan Di Dalam Pesanan.\n";
+    }
+}
+
+
 // DETAIL ORDER
 void showOrderDetails() {
     if (customerQueue.empty()) {
