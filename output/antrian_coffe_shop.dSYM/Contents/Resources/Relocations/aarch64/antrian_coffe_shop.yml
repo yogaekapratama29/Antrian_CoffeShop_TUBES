@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/macairm1/Antrian_CoffeShop_TUBES/output/antrian_coffe_shop'
+relocations:     []
+...

@@ -156,5 +156,48 @@ void processPayment() {
 }
 
 int main() {
+       initializeMenu();
+
+    int choice;
+    do {
+        cout << "\n=== Sistem Manajemen Antrian ===\n";
+        cout << "1. Tambah Pelanggan\n";
+        cout << "2. Tambah Pesanan\n";
+        cout << "3. Hapus Pesanan\n";
+        cout << "4. Lihat Detail Pesanan\n";
+        cout << "5. Update Pesanan\n";
+        cout << "6. Proses Pembayaran\n";
+        cout << "0. Keluar\n";
+        cout << "Pilih opsi: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                addCustomer();
+                break;
+            case 2:
+                addOrder();
+                break;
+            case 3:
+                deleteOrder();
+                break;
+            case 4:
+                showOrderDetails();
+                break;
+            case 5:
+                updateOrder();
+                break;
+            case 6:
+                processPayment();
+                break;
+            case 0:
+                cout << "Keluar dari program.\n";
+                break;
+            default:
+                cout << "Pilihan tidak valid.\n";
+                break;
+        }
+    } while (choice != 0);
+
     return 0;
 }
