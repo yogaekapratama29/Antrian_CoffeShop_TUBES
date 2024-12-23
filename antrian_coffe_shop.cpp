@@ -29,10 +29,12 @@ void addCustomer() {
     Customer customer;
     customer.queueNumber = queueCounter++;
     cout << "Masukkan nama pelanggan: ";
-    cin >> customer.name;
+    cin.ignore(); 
+    getline(cin, customer.name); 
     customerQueue.push(customer);
     cout << "Pelanggan " << customer.name << " dengan No. Antrian " << customer.queueNumber << " telah ditambahkan ke antrian.\n";
 }
+
 
 // DISPLAY MENU
 void displayMenu() {
@@ -112,7 +114,7 @@ void showOrderDetails() {
         cout << "Total Pembayaran: Rp " << total << endl;
     }
 }
-
+ 
 // UPDATE ORDER
 void updateOrder() {
     if (customerQueue.empty()) {
@@ -152,8 +154,28 @@ void processPayment() {
     }
     Customer customer = customerQueue.front();
     customerQueue.pop();
-    cout << "Pembayaran selesai untuk pelanggan " << customer.name << " (No. Antrian " << customer.queueNumber << ").\n";
+
+    double total = 0;
+
+    cout << "\n=== Resi Pembayaran ===\n";
+    cout << "Nama Pelanggan: " << customer.name << endl;
+    cout << "No. Antrian: " << customer.queueNumber << endl;
+    // setw() untuk mengatur lebar kolom pada nama produk dan jumlah pesanan
+    cout << left << setw(15) << "Produk" << setw(10) << "Jumlah" << "Harga Total" << endl;
+    cout << "-------------------------------------\n";
+    // auto& untuk mengatur variabel order adalah referensi ke dalam map customer.order dan dapat menentukan tipe data elemen otomatis
+    for (const auto& order : customer.orders) {
+        double subtotal = order.second * menu[order.first];
+        total += subtotal;
+        cout << left << setw(15) << order.first << setw(10) << order.second << "Rp " << subtotal << endl;
+    }
+    cout << "-------------------------------------\n";
+    cout << "Total Pembayaran: Rp " << total << endl;
+
+    cout << "\nTerima kasih telah melakukan pembayaran!\n";
+    cout << "=========================\n";
 }
+
 
 int main() {
        initializeMenu();
